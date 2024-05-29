@@ -14,4 +14,4 @@ module load nextflow/22.04.3
 
 nextflow run down_sra.nf -c ./down_sra_conf/run.config -resume -profile slurm
 
-module unload singularity/3.8.0
+module unload nextflow/22.04.3
