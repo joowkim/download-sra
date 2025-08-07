@@ -10,8 +10,10 @@
 #SBATCH -o slurm.%A.o
 #SBATCH -e slurm.%A.e
 
-module load nextflow/22.04.3
+module load java
+module load nextflow
 
 nextflow run down_sra.nf -c ./down_sra_conf/run.config -resume -profile slurm
 
-module unload nextflow/22.04.3
+module unload java
+module unload nextflow

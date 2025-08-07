@@ -1,9 +1,9 @@
 nextflow.enable.dsl=2
 
 process down_sra {
-    tag "downloading_SRA"
+    tag "${sra_id}"
 
-    cpus 4
+    cpus 6
     memory "8 GB"
 
     publishDir "${launchDir}/analysis/SRA", mode: "copy"
@@ -18,9 +18,11 @@ process down_sra {
 
     script:
     // --split-files for PE data
+    // parallel-fastq-dump --sra-id ${sra_id} --threads 6  --split-files --gzip --tmpdir /mnt/beegfs/kimj32/tmp/fastq-dump-tmpdir
     """
-        fasterq-dump --split-files ${sra_id}
-        pigz ${sra_id}*.fastq
+        fasterq-dump --split-files "${sra_id}"
+        pigz ${sra_id}_1.fastq
+        pigz ${sra_id}_2.fastq
     """
 }
 
